@@ -1,0 +1,62 @@
+[
+  {
+    "id": 101,
+    "title": "Contact form tested",
+    "category": "Frontend",
+    "priority": "Critical",
+    "status": "Pending",
+    "owner": "Naveen",
+    "dueDate": "2026-05-04",
+    "notes": "Submit a real enquiry and confirm the success state."
+  },
+  {
+    "id": 102,
+    "title": "Homepage meta title added",
+    "category": "SEO",
+    "priority": "High",
+    "status": "Fixed",
+    "owner": "Amani",
+    "dueDate": "2026-05-02",
+    "notes": "Check browser title and social preview."
+  },
+  {
+    "id": 103,
+    "title": "Mobile navigation checked",
+    "category": "QA",
+    "priority": "High",
+    "status": "In Progress",
+    "owner": "Dilan",
+    "dueDate": "2026-05-03",
+    "notes": "Inspect 390px and 768px widths before launch."
+  },
+  {
+    "id": 104,
+    "title": "SSL certificate verified",
+    "category": "Security",
+    "priority": "Critical",
+    "status": "Blocked",
+    "owner": "Mira",
+    "dueDate": "2026-05-01",
+    "notes": "Waiting for DNS propagation."
+  },
+  {
+    "id": 105,
+    "title": "Image compression pass complete",
+    "category": "Performance",
+    "priority": "Medium",
+    "status": "Pending",
+    "owner": "Raveen",
+    "dueDate": "2026-05-05",
+    "notes": "Review hero and gallery assets."
+  },
+  {
+    "id": 106,
+    "title": "Privacy policy linked in footer",
+    "category": "Content",
+    "priority": "Low",
+    "status": "Fixed",
+    "owner": "Ishara",
+    "dueDate": "2026-05-06",
+    "notes": "Footer link and page content approved."
+  }
+]

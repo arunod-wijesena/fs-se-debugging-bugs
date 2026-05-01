@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LaunchDesk Debugging Lab</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="LaunchDesk home">
+          <span class="brand-mark">LD</span>
+          <span>
+            <strong>LaunchDesk</strong>
+            <small>Website launch readiness</small>
+          </span>
+        </a>
+        <nav class="topbar-actions" aria-label="Primary actions">
+          <button
+            class="ghost-button"
+            type="button"
+            id="resetDemoButton"
+            title="Reload demo checks"
+          >
+            <span aria-hidden="true">R</span>
+            Reset demo
+          </button>
+          <button
+            class="primary-button"
+            type="button"
+            id="exportButton"
+            title="Export checklist as CSV"
+          >
+            <span aria-hidden="true">CSV</span>
+            Export CSV
+          </button>
+        </nav>
+      </header>
+
+      <section class="hero-panel" aria-labelledby="pageTitle">
+        <div class="hero-copy">
+          <h1 id="pageTitle">Launch readiness command center</h1>
+          <p>
+            Track the final QA, content, SEO, security, and deployment checks
+            before a client website goes live.
+          </p>
+        </div>
+        <div class="readiness-card" aria-live="polite">
+          <span class="metric-label">Readiness score</span>
+          <strong id="scoreValue">0%</strong>
+          <div class="progress-track" aria-hidden="true">
+            <span class="progress-fill" id="scoreBar"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Launch metrics">
+        <article class="metric-card">
+          <span>Total checks</span>
+          <strong id="totalCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>Fixed</span>
+          <strong id="fixedCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>Critical open</span>
+          <strong id="criticalCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>Due this week</span>
+          <strong id="dueSoonCount">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <aside class="panel add-panel" aria-labelledby="addCheckTitle">
+          <div class="section-heading">
+            <span class="section-icon" aria-hidden="true">+</span>
+            <div>
+              <h2 id="addCheckTitle">Add launch check</h2>
+              <p>Create a check item for the launch team.</p>
+            </div>
+          </div>
+
+          <form id="checkForm" class="launch-form" novalidate>
+            <label>
+              Check title
+              <input
+                id="titleInput"
+                type="text"
+                placeholder="Example: Contact form tested"
+              />
+            </label>
+
+            <div class="form-row">
+              <label>
+                Category
+                <select id="categoryInput">
+                  <option value="">Select category</option>
+                  <option value="Frontend">Frontend</option>
+                  <option value="Backend">Backend</option>
+                  <option value="SEO">SEO</option>
+                  <option value="Performance">Performance</option>
+                  <option value="Security">Security</option>
+                  <option value="Content">Content</option>
+                  <option value="QA">QA</option>
+                  <option value="Deployment">Deployment</option>
+                </select>
+              </label>
+
+              <label>
+                Priority
+                <select id="priorityInput">
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Critical">Critical</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label>
+                Status
+                <select id="statusInput">
+                  <option value="Pending">Pending</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Fixed">Fixed</option>
+                  <option value="Blocked">Blocked</option>
+                </select>
+              </label>
+
+              <label>
+                Owner
+                <input id="ownerInput" type="text" placeholder="Team member" />
+              </label>
+            </div>
+
+            <label>
+              Due date
+              <input id="dueDateInput" type="date" />
+            </label>
+
+            <button class="primary-button full-width" type="submit">
+              <span aria-hidden="true">+</span>
+              Add check
+            </button>
+            <p class="form-message" id="formMessage" role="status"></p>
+          </form>
+        </aside>
+
+        <section class="panel list-panel" aria-labelledby="checklistTitle">
+          <div class="list-header">
+            <div class="section-heading">
+              <span class="section-icon" aria-hidden="true">OK</span>
+              <div>
+                <h2 id="checklistTitle">Launch checklist</h2>
+                <p id="listSummary">No checks loaded yet.</p>
+              </div>
+            </div>
+            <div class="filters" aria-label="Checklist filters">
+              <label class="search-field">
+                <span class="sr-only">Search checks</span>
+                <input
+                  id="searchInput"
+                  type="search"
+                  placeholder="Search title, category, owner..."
+                />
+              </label>
+              <label>
+                <span class="sr-only">Filter by status</span>
+                <select id="statusFilter">
+                  <option value="All">All statuses</option>
+                  <option value="Pending">Pending</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Fixed">Fixed</option>
+                  <option value="Blocked">Blocked</option>
+                </select>
+              </label>
+              <label>
+                <span class="sr-only">Filter by priority</span>
+                <select id="priorityFilter">
+                  <option value="All">All priorities</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Critical">Critical</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Check</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Due</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="checkRows"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="emptyState" hidden>
+            <strong>No checks match this view</strong>
+            <span>Adjust the filters or add a new launch check.</span>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel activity-panel" aria-labelledby="activityTitle">
+        <div class="section-heading">
+          <span class="section-icon" aria-hidden="true">i</span>
+          <div>
+            <h2 id="activityTitle">Debuggable activity feed</h2>
+            <p>
+              Recent actions are shown here so students can verify whether UI
+              events really fired.
+            </p>
+          </div>
+        </div>
+        <ol id="activityLog" class="activity-log"></ol>
+      </section>
+    </main>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
