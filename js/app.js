@@ -190,7 +190,7 @@ function renderRows(list) {
 
   const rows = list.map((check) => {
     const priorityClass = `priority-${check.priority.toLowerCase()}`;
-    const statusClass = `status-${check.status.toLowerCase()}`; // Intentional bug: "In Progress" needs a slug class.
+    const statusClass = `status-${check.status.toLowerCase().replace(" ", "-")}`;
 
     return `
       <tr>
