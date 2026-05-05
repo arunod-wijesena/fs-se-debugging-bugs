@@ -1,5 +1,5 @@
 const STORAGE_SAVE_KEY = "launchdesk-v1-items";
-const STORAGE_LOAD_KEY = "launchdesk-items-v1"; // Intentional bug: this key should match STORAGE_SAVE_KEY.
+const STORAGE_LOAD_KEY = "launchdesk-v1-items";
 
 const demoChecks = [
   {
@@ -132,8 +132,7 @@ function handleAddCheck(event) {
   const owner = ownerInput.value.trim() || "Unassigned";
   const dueDate = dueDateInput.value || new Date().toISOString().slice(0, 10);
 
-  if (!title && !category) {
-    // Intentional bug: validation should stop when either required field is missing.
+  if (!title || !category) {
     formMessage.textContent =
       "Please enter a check title and choose a category.";
     return;
@@ -210,12 +209,12 @@ function renderRows(list) {
           <span class="row-actions">
             <select data-status-id="${check.id}" aria-label="Update status for ${escapeHtml(check.title)}">
               ${["Pending", "In Progress", "Fixed", "Blocked"]
-                .map(
-                  (status) => `
+        .map(
+          (status) => `
                 <option value="${status}" ${status === check.status ? "selected" : ""}>${status}</option>
               `,
-                )
-                .join("")}
+        )
+        .join("")}
             </select>
             <button class="icon-button" type="button" data-remove-id="${check.id}" title="Delete check">
               x
