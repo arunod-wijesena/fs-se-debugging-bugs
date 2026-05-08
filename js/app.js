@@ -325,7 +325,7 @@ function exportCsv() {
     "Due Date",
   ];
   const rows = currentView.map((check) => [
-    check.name, // Intentional bug: property should be check.title.
+    check.title,
     check.category,
     check.priority,
     check.status,
