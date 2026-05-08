@@ -112,7 +112,8 @@ function loadChecks() {
   }
 
   try {
-    return JSON.parse(saved);
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed : [...demoChecks]
   } catch (error) {
     console.warn("Could not parse saved launch checks.", error);
     return [...demoChecks];
