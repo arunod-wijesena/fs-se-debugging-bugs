@@ -287,9 +287,11 @@ function handleStatusChange(event) {
   }
 
   check.status = statusSelect.value;
-  renderRows(currentView);
+  saveChecks();
+  applyFilters();
+  updateMetrics();
   logActivity(`Changed "${check.title}" to ${check.status}.`);
-  // Intentional bug: status changes should save, update filters, and refresh metrics.
+
 }
 
 async function resetDemoData() {
