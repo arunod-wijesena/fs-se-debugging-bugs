@@ -103,6 +103,7 @@ exportButton.addEventListener("click", exportCsv);
 renderApp();
 logActivity("Demo data loaded. Start by testing the checklist workflows.");
 
+// Loads the checks from localStorage or uses demo checks if no saved data is found.
 function loadChecks() {
   const saved = localStorage.getItem(STORAGE_LOAD_KEY);
 
@@ -118,10 +119,12 @@ function loadChecks() {
   }
 }
 
+// Saves the current list of checks to localStorage.
 function saveChecks() {
   localStorage.setItem(STORAGE_SAVE_KEY, JSON.stringify(checks));
 }
 
+// Handles adding a new check to the list.
 function handleAddCheck(event) {
   event.preventDefault();
 
@@ -157,6 +160,7 @@ function handleAddCheck(event) {
   logActivity(`Added "${newCheck.title}" to the launch checklist.`);
 }
 
+// Applies filters to the checks list based on search term and status/priority filters.
 function applyFilters() {
   const searchTerm = searchInput.value.trim().toLowerCase();
   const selectedStatus = statusFilter.value;
@@ -258,6 +262,7 @@ function updateMetrics() {
   scoreBar.style.width = `${score}%`;
 }
 
+// Handles table clicks for delete and status updates
 function handleTableClick(event) {
   const deleteButton = event.target.closest("[data-remove-id]");
 
@@ -354,6 +359,7 @@ function exportCsv() {
   logActivity("Exported the current checklist view.");
 }
 
+// Logs activity messages to the activity log.
 function logActivity(message) {
   const item = document.createElement("li");
   item.textContent = `${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - ${message}`;
@@ -364,6 +370,7 @@ function logActivity(message) {
   }
 }
 
+// Returns the number of days between the given date and today.
 function daysUntil(dateValue) {
   const today = new Date();
   const target = new Date(dateValue);
@@ -371,6 +378,7 @@ function daysUntil(dateValue) {
   return Math.ceil(difference / 86400000);
 }
 
+// Formats a date value for display.
 function formatDate(dateValue) {
   if (!dateValue) {
     return "No date";
@@ -383,6 +391,7 @@ function formatDate(dateValue) {
   }).format(new Date(dateValue));
 }
 
+// Escapes HTML special characters to prevent XSS attacks.
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
