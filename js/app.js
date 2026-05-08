@@ -171,7 +171,7 @@ function applyFilters() {
       check.category?.toLowerCase().includes(term) ||
       check.priority?.toLowerCase().includes(term) ||
       check.status?.toLowerCase().includes(term) ||
-      check.owner.toLowerCase().includes(term)
+      check.owner?.toLowerCase().includes(term)
     );
   });
 
