@@ -312,8 +312,13 @@ async function resetDemoData() {
     if (!response.ok) {
       throw new Error(`Demo data request failed with ${response.status}`);
     }
+    const data = await response.json();
 
-    checks = await response.json();
+    if (!Array.isArray(data)) {
+      throw new Error("Demo data is not an array");
+    }
+
+    checks = data;
     saveChecks();
     applyFilters();
     logActivity("Demo checklist reloaded from JSON.");
