@@ -243,7 +243,10 @@ function updateMetrics() {
   const criticalOpen = checks.filter(
     (check) => check.priority === "Critical" && check.status !== "Fixed",
   ).length;
-  const dueSoon = checks.filter((check) => daysUntil(check.dueDate) > 7).length; // Intentional bug: this should count items due within 7 days.
+  const dueSoon = checks.filter((check) => {
+    const days = daysUntil(check.dueDate);
+    return days >= 0 && days <= 7;
+  }).length;
   const score = total === 0 ? 0 : Math.round((fixed / total) * 100);
 
   totalCount.textContent = total;
