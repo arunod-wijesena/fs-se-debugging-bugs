@@ -237,6 +237,7 @@ function renderRows(list) {
   checkRows.innerHTML = rows.join("");
 }
 
+// Updates all dashboard metrics: total, fixed, critical open, due soon and score.
 function updateMetrics() {
   const total = checks.length;
   const fixed = checks.filter((check) => check.status === "Fixed").length;
@@ -272,6 +273,7 @@ function handleTableClick(event) {
   logActivity(`Deleted "${removed?.title || "launch check"}".`);
 }
 
+// Handles status dropdown changes and persists the update.
 function handleStatusChange(event) {
   const statusSelect = event.target.closest("[data-status-id]");
 
@@ -294,6 +296,7 @@ function handleStatusChange(event) {
 
 }
 
+// Resets the demo data and persists the update.
 async function resetDemoData() {
   formMessage.textContent = "";
 
@@ -315,6 +318,7 @@ async function resetDemoData() {
   }
 }
 
+// Exports the current view as a CSV file.
 function exportCsv() {
   const header = [
     "Title",
